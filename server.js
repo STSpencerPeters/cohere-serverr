@@ -42,13 +42,13 @@ async function loadDocuments() {
   ];
 
   const documents = [];
-//change to fit your documents
-  /*
+
   for (const file of files) {
     try {
       const content = await fs.readFile(file, 'utf-8');
       const json = JSON.parse(content);
 
+      // Handle tour_details.json
       if (file.includes('tour_details')) {
         json.forEach(tour => {
           const detailsSnippet = tour.details?.map(d => d.body).join(' ') || '';
@@ -60,7 +60,10 @@ async function loadDocuments() {
             }
           });
         });
-      } else if (file.includes('tours')) {
+      }
+
+      // Handle tours.json
+      else if (file.includes('tours')) {
         json.forEach(tour => {
           documents.push({
             id: `tours_${tour.name}`,
@@ -70,7 +73,10 @@ async function loadDocuments() {
             }
           });
         });
-      } else if (file.includes('rest_countries')) {
+      }
+
+      // Handle rest_countries.json
+      else if (file.includes('rest_countries')) {
         json.forEach(country => {
           const languageList = Object.values(country.languages || {}).join(', ');
           documents.push({
@@ -81,7 +87,10 @@ async function loadDocuments() {
             }
           });
         });
-      } else if (file.includes('unesco_sites')) {
+      }
+
+      // Handle unesco_sites.json
+      else if (file.includes('unesco_sites')) {
         json.query?.row?.forEach(site => {
           documents.push({
             id: `unesco_sites_${site.site}`,
@@ -91,7 +100,10 @@ async function loadDocuments() {
             }
           });
         });
-      } else if (file.includes('merged_countries')) {
+      }
+
+      // Handle merged_countries.json
+      else if (file.includes('merged_countries')) {
         json.forEach(country => {
           documents.push({
             id: `merged_countries_${country.name}`,
@@ -102,7 +114,7 @@ async function loadDocuments() {
           });
         });
       }
-*/
+
     } catch (err) {
       console.error(`Error reading ${file}:`, err);
     }
@@ -111,6 +123,7 @@ async function loadDocuments() {
   console.log(`Loaded ${documents.length} documents`);
   return documents;
 }
+
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
